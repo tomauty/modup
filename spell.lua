@@ -58,35 +58,27 @@
         for i = shown + 1, tlength(fontstrings) do
             fontstrings[i]:Hide()
         end
-        print(shown)
     end
 
     f:SetScript('OnEvent', function()
-        local i = 0
+        local i = 1
     	while true do
             GameTooltip:SetOwner(UIParent, 'ANCHOR_NONE')
     		GameTooltip:ClearLines()
     		GameTooltip:SetPlayerBuff(GetPlayerBuff(i, 'HELPFUL'))
             local stack = GetPlayerBuffApplications(i)
     		local buff  = GameTooltipTextLeft1:GetText()
-            for i = 1, tlength(modspells) do
-                local spell = modspells[i]
+
+
+            for j = 1, tlength(modspells) do
+                local spell = modspells[j]
                 if buff and string.find(spell.name, buff) then modBuff(spell, stack) end
             end
 
-    		--[[GameTooltip:ClearLines()
-    		GameTooltip:SetPlayerBuff(GetPlayerBuff(i, 'HARMFUL'))
-    		local debuff = GameTooltipTextLeft1:GetText()
-            for i = 1, tlength(modspells) do
-                local spell = modspells[i]
-                if spell.name == debuff then modBuff(spell, stack) end
-            end ]]
-
             GameTooltip:Hide()
-    		if (not buff) then break end
-    		i = i + 1
+            if not buff then break end
+            i = i + 1
         end
-
     end)
 
     --
